@@ -5,7 +5,7 @@
 1. Go to [Google Apps Script](https://script.google.com/)
 2. Click "New Project"
 3. Name your project "J&R Snow Leads Handler"
-4. Delete the default code and paste the entire contents of: `premade-files/jandr_leads_apps_script_configured.gs`
+4. Delete the default code and paste the entire contents of: `premade-files/jandr_leads_apps_script_with_giveaway.gs`
 
 ## Step 2: Set Script Properties (IMPORTANT)
 
@@ -34,9 +34,11 @@
 
 ## Step 4: Update Your Landing Page
 
-1. Open `snow-cicero/index.html`
-2. Find line ~480 where it says: `YOUR_DEPLOYED_GOOGLE_APPS_SCRIPT_URL`
-3. Replace with your actual deployed URL from Step 3
+1. Update all form URLs in these files:
+   - `snow-cicero/index.html`
+   - `snow-giveaway/index.html`
+   - `snow-giveaway/thanks.html`
+2. Find the Google Apps Script URLs and replace with your actual deployed URL from Step 3
 
 ## Step 5: Test the Form
 

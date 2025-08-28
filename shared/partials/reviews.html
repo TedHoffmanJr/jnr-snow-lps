@@ -81,7 +81,8 @@ function initReviewsCarousel() {
     // Navigation handled by chevron arrows - no dots needed
   });
   
-  // Start autoplay
+  // Initialize position and start autoplay
+  updateCarousel();
   startAutoPlay();
   
   // Touch/swipe support for mobile
@@ -116,48 +117,30 @@ function nextReview() {
   const isDesktop = window.innerWidth >= 1024;
   
   if (isMobile) {
-    // On mobile, stop at the last card, don't wrap around
+    // On mobile, cycle through all cards
     if (currentReview < reviewsData.length - 1) {
       currentReview++;
     } else {
-      // Pause auto-play when we reach the last card on mobile
-      pauseAutoPlay();
-      // Reset to first after a longer pause
-      setTimeout(() => {
-        currentReview = 0;
-        updateCarousel();
-        startAutoPlay();
-      }, 3000);
-      return;
+      // Cycle back to first
+      currentReview = 0;
     }
   } else if (isDesktop) {
-    // On desktop, stop when we can't show more cards
+    // On desktop, show 3 cards at a time
     const maxPosition = Math.max(0, reviewsData.length - 3);
     if (currentReview < maxPosition) {
       currentReview++;
     } else {
-      // Pause and reset after a longer pause
-      pauseAutoPlay();
-      setTimeout(() => {
-        currentReview = 0;
-        updateCarousel();
-        startAutoPlay();
-      }, 3000);
-      return;
+      // Cycle back to first
+      currentReview = 0;
     }
   } else {
-    // Tablet - similar to desktop but show 2 cards
+    // Tablet - show 2 cards at a time
     const maxPosition = Math.max(0, reviewsData.length - 2);
     if (currentReview < maxPosition) {
       currentReview++;
     } else {
-      pauseAutoPlay();
-      setTimeout(() => {
-        currentReview = 0;
-        updateCarousel();
-        startAutoPlay();
-      }, 3000);
-      return;
+      // Cycle back to first
+      currentReview = 0;
     }
   }
   
@@ -237,7 +220,7 @@ function updateCarousel() {
 }
 
 function startAutoPlay() {
-  autoPlayInterval = setInterval(nextReview, 5000);
+  autoPlayInterval = setInterval(nextReview, 8000);
 }
 
 function pauseAutoPlay() {
