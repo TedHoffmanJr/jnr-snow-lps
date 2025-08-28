@@ -1,0 +1,261 @@
+<!-- Reviews Carousel Partial -->
+<div class="reviews-section">
+  <div class="reviews-container" id="reviewsCarousel">
+    <div class="reviews-track" id="reviewsTrack">
+      <!-- Reviews will be dynamically inserted here -->
+    </div>
+  </div>
+  <div class="reviews-nav" id="reviewsNav">
+    <button class="review-arrow review-arrow-left" id="reviewPrev" onclick="prevReview()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    </button>
+    <button class="review-arrow review-arrow-right" id="reviewNext" onclick="nextReview()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// Sample reviews data parsed from CSV (this will be populated from the actual CSV)
+const reviewsData = [
+  {
+    name: "Michael C.",
+    location: "Cicero",
+    rating: 5,
+    text: "I've been using J and R for the last 5 years or so for my snow plow and weekly lawn mowing. Their service has continued to improve yearly as well as their equipment and communication."
+  },
+  {
+    name: "Perry",
+    location: "Liverpool", 
+    rating: 5,
+    text: "EXCEPTIONAL SERVICE!! They are on top of things. They email you a heads up on the upcoming snow, keep you updating on when they will be making rounds and respond immediately to any questions or concerns."
+  },
+  {
+    name: "Gregory D.",
+    location: "Clay",
+    rating: 5,
+    text: "Their snow service is outstanding and they don't scrimp when it comes time to clean up. I have the snow blowing service and love how it cleans up and doesn't ruin the driveway or lawn."
+  },
+  {
+    name: "Angela W.",
+    location: "Cicero",
+    rating: 5,
+    text: "My driveway is always cleared before I leave for work, and when I get home from work. They are clean, clear as close to your car as possible without hitting it, and NEVER have they dug up any of my grass."
+  },
+  {
+    name: "Heather P.",
+    location: "North Syracuse",
+    rating: 5,
+    text: "The price is great but the people are better! They are very professional & friendly. They stay in constant communication and the emails are invaluable with the most precise winter weather information."
+  }
+];
+
+// Carousel initialization
+let currentReview = 0;
+let autoPlayInterval;
+
+function initReviewsCarousel() {
+  const track = document.getElementById('reviewsTrack');
+  const nav = document.getElementById('reviewsNav');
+  
+  // Populate reviews
+  reviewsData.forEach((review, index) => {
+    const reviewCard = document.createElement('div');
+    reviewCard.className = 'review-card';
+    reviewCard.innerHTML = `
+      <div class="review-header">
+        <div>
+          <div class="review-name">${review.name}</div>
+          <div class="review-location">${review.location}</div>
+        </div>
+        <div class="review-stars">${'★'.repeat(review.rating)}</div>
+      </div>
+      <div class="review-text">"${review.text}"</div>
+    `;
+    track.appendChild(reviewCard);
+    
+    // Navigation handled by chevron arrows - no dots needed
+  });
+  
+  // Start autoplay
+  startAutoPlay();
+  
+  // Touch/swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+    pauseAutoPlay();
+  });
+  
+  track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    startAutoPlay();
+  });
+  
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 50) nextReview();
+    if (touchEndX > touchStartX + 50) prevReview();
+  }
+}
+
+function goToReview(index) {
+  currentReview = index;
+  updateCarousel();
+  resetAutoPlay();
+}
+
+function nextReview() {
+  const isMobile = window.innerWidth < 768;
+  const isDesktop = window.innerWidth >= 1024;
+  
+  if (isMobile) {
+    // On mobile, stop at the last card, don't wrap around
+    if (currentReview < reviewsData.length - 1) {
+      currentReview++;
+    } else {
+      // Pause auto-play when we reach the last card on mobile
+      pauseAutoPlay();
+      // Reset to first after a longer pause
+      setTimeout(() => {
+        currentReview = 0;
+        updateCarousel();
+        startAutoPlay();
+      }, 3000);
+      return;
+    }
+  } else if (isDesktop) {
+    // On desktop, stop when we can't show more cards
+    const maxPosition = Math.max(0, reviewsData.length - 3);
+    if (currentReview < maxPosition) {
+      currentReview++;
+    } else {
+      // Pause and reset after a longer pause
+      pauseAutoPlay();
+      setTimeout(() => {
+        currentReview = 0;
+        updateCarousel();
+        startAutoPlay();
+      }, 3000);
+      return;
+    }
+  } else {
+    // Tablet - similar to desktop but show 2 cards
+    const maxPosition = Math.max(0, reviewsData.length - 2);
+    if (currentReview < maxPosition) {
+      currentReview++;
+    } else {
+      pauseAutoPlay();
+      setTimeout(() => {
+        currentReview = 0;
+        updateCarousel();
+        startAutoPlay();
+      }, 3000);
+      return;
+    }
+  }
+  
+  updateCarousel();
+}
+
+function prevReview() {
+  if (currentReview > 0) {
+    currentReview--;
+  } else {
+    // Go to last viewable position
+    const isMobile = window.innerWidth < 768;
+    const isDesktop = window.innerWidth >= 1024;
+    
+    if (isMobile) {
+      currentReview = reviewsData.length - 1;
+    } else if (isDesktop) {
+      currentReview = Math.max(0, reviewsData.length - 3);
+    } else {
+      currentReview = Math.max(0, reviewsData.length - 2);
+    }
+  }
+  updateCarousel();
+}
+
+function updateCarousel() {
+  const track = document.getElementById('reviewsTrack');
+  const dots = document.querySelectorAll('.review-dot');
+  
+  // Update track position - simplified for mobile full width
+  const isMobile = window.innerWidth < 768;
+  const isDesktop = window.innerWidth >= 1024;
+  
+  if (isMobile) {
+    // On mobile, each card is 100% width with no gap
+    track.style.transform = `translateX(-${currentReview * 100}%)`;
+  } else if (isDesktop) {
+    // On desktop, show 3 cards at 33.33% width each
+    const cardWidth = 33.333;
+    const gapPercent = 2;
+    // Only allow scrolling to positions 0, 1, 2 (showing cards 0-2, 1-3, 2-4)
+    const maxPosition = Math.max(0, reviewsData.length - 3);
+    const position = Math.min(currentReview, maxPosition);
+    track.style.transform = `translateX(-${position * (cardWidth + gapPercent)}%)`;
+  } else {
+    // On tablet, show 2 cards at 50% width
+    const cardWidth = 50;
+    const gapPercent = 3;
+    const maxPosition = Math.max(0, reviewsData.length - 2);
+    const position = Math.min(currentReview, maxPosition);
+    track.style.transform = `translateX(-${position * (cardWidth + gapPercent)}%)`;
+  }
+  
+  // Update arrow states based on viewport
+  const prevBtn = document.getElementById('reviewPrev');
+  const nextBtn = document.getElementById('reviewNext');
+  
+  if (prevBtn && nextBtn) {
+    const isMobile = window.innerWidth < 768;
+    const isDesktop = window.innerWidth >= 1024;
+    
+    // Previous button state
+    prevBtn.style.opacity = currentReview === 0 ? '0.3' : '1';
+    
+    // Next button state depends on viewport
+    let atEnd = false;
+    if (isMobile) {
+      atEnd = currentReview === reviewsData.length - 1;
+    } else if (isDesktop) {
+      atEnd = currentReview >= Math.max(0, reviewsData.length - 3);
+    } else {
+      atEnd = currentReview >= Math.max(0, reviewsData.length - 2);
+    }
+    
+    nextBtn.style.opacity = atEnd ? '0.3' : '1';
+  }
+}
+
+function startAutoPlay() {
+  autoPlayInterval = setInterval(nextReview, 5000);
+}
+
+function pauseAutoPlay() {
+  clearInterval(autoPlayInterval);
+}
+
+function resetAutoPlay() {
+  pauseAutoPlay();
+  startAutoPlay();
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initReviewsCarousel);
+} else {
+  initReviewsCarousel();
+}
+
+// Update on window resize
+window.addEventListener('resize', updateCarousel);
+</script>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Snow Blowing Giveaway</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f7fa;
+        color: #333;
+      }
+      .hero {
+        padding: 2rem 1rem;
+        text-align: center;
+        background: #0072c6;
+        color: #fff;
+      }
+      .hero h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+      .hero p {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+      }
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      form {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .field {
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+      }
+      input[type="text"],
+      input[type="tel"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        background: #0072c6;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .fine-print {
+        font-size: 0.75rem;
+        color: #555;
+        margin-top: 0.5rem;
+      }
+      .hidden-field {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <h1>Free Snow Blowing Giveaway</h1>
+      <p>
+        Enter once and you’re in for all three drawings: 9/15, 10/1, 10/15. We’re
+        picking one winner each from Cicero, Clay, and Liverpool every draw.
+      </p>
+    </section>
+    <section id="enter" class="container">
+      <form id="giveaway-form" novalidate>
+        <div class="field">
+          <label for="g_name">Name</label>
+          <input type="text" id="g_name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="g_mobile">Mobile Phone</label>
+          <input type="tel" id="g_mobile" name="mobile" required pattern="^[0-9\-\s\(\)]+$" />
+        </div>
+        <div class="field">
+          <label for="g_email">Email</label>
+          <input type="email" id="g_email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="g_address">Street Address</label>
+          <input type="text" id="g_address" name="address" required />
+        </div>
+        <div class="field">
+          <label for="g_zip">ZIP Code</label>
+          <input type="text" id="g_zip" name="zip" required pattern="\d{5}" />
+        </div>
+        <div class="field">
+          <label for="g_town">Town</label>
+          <select id="g_town" name="town" required>
+            <option value="" selected disabled>Select your town</option>
+            <option value="Cicero">Cicero</option>
+            <option value="Clay">Clay</option>
+            <option value="Liverpool">Liverpool</option>
+          </select>
+        </div>
+        <!-- Honeypot -->
+        <div class="hidden-field">
+          <label for="g_company">Company</label>
+          <input type="text" id="g_company" name="company" autocomplete="off" />
+        </div>
+        <input type="hidden" name="source" value="LP" />
+        <div class="fine-print">
+          No purchase necessary. 18+ residents of Cicero, Clay, or Liverpool only. New
+          customers. Entries roll forward if not selected. One entry per address.
+        </div>
+        <button type="submit" id="giveawaySubmit">Enter Now</button>
+      </form>
+      <p id="giveawayStatus" class="fine-print"></p>
+    </section>
+    <script>
+      const giveawayForm = document.getElementById('giveaway-form');
+      const statusEl = document.getElementById('giveawayStatus');
+      giveawayForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('giveawaySubmit');
+        submitBtn.disabled = true;
+        statusEl.textContent = 'Submitting...';
+        const formData = new FormData(giveawayForm);
+        try {
+          const response = await fetch('YOUR_GIVEAWAY_APPS_SCRIPT_URL', {
+            method: 'POST',
+            body: formData,
+          });
+          if (response.ok) {
+            window.location.href = '/thanks';
+          } else {
+            throw new Error('Submission failed');
+          }
+        } catch (err) {
+          statusEl.textContent = 'There was an error submitting your entry. Please try again.';
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
