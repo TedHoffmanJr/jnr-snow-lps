@@ -42,10 +42,15 @@
       background-image: url('images/hero-bg.jpg');
     }
     
+    /* Hero content padding to prevent button overlap */
+    .hero-content {
+      padding-bottom: 100px; /* Space for button on mobile */
+    }
+    
     /* Hero bottom CTA button */
     .hero-bottom-cta {
       position: absolute;
-      bottom: 100px; /* Default for mobile */
+      bottom: 20px; /* Much closer to bottom on mobile */
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
@@ -56,26 +61,41 @@
     
     .hero-bottom-cta .btn {
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      white-space: nowrap; /* Prevent text wrapping */
-      padding: var(--space-4) var(--space-6); /* Proper padding */
+      white-space: nowrap;
+      padding: var(--space-4) var(--space-6);
     }
     
-    /* Desktop positioning */
-    @media (min-width: 768px) {
+    /* Tablet positioning */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-content {
+        padding-bottom: 160px; /* More space for tablet */
+      }
+      
       .hero-bottom-cta {
-        bottom: 260px; /* Much higher on desktop to clear trust items completely */
+        bottom: 140px; /* Mid-range positioning */
       }
     }
     
-    /* Mobile specific adjustments */
+    /* Desktop positioning */
+    @media (min-width: 1024px) {
+      .hero-content {
+        padding-bottom: 280px; /* Maximum space for desktop */
+      }
+      
+      .hero-bottom-cta {
+        bottom: 260px; /* High positioning for desktop */
+      }
+    }
+    
+    /* Mobile button adjustments */
     @media (max-width: 767px) {
       .hero-bottom-cta .btn {
-        width: auto; /* Let button size to content */
-        max-width: 90%; /* Prevent edge touching */
+        width: auto;
+        max-width: 90%;
         margin: 0 auto;
         display: block;
-        font-size: 0.95rem; /* Slightly smaller on mobile */
-        padding: var(--space-4) var(--space-5); /* Adjusted padding */
+        font-size: 0.95rem;
+        padding: var(--space-4) var(--space-5);
       }
     }
     
