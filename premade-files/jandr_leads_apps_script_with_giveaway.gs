@@ -17,7 +17,7 @@
  * 
  * GOOGLE SHEET SETUP:
  * - "Leads" tab headers: Timestamp, Name, Mobile, Email, Address, ZIP, Town, Page, Source
- * - "Giveaway" tab headers: Timestamp, Name, Mobile, Email, Town, Page, Source, Consent
+ * - "Giveaway" tab headers: Timestamp, Name, Mobile, Email, Address, ZIP, Town, Page, Source, Consent
  */
 
 // Your actual Google Sheet ID
@@ -68,12 +68,14 @@ function doPost(e) {
     let row;
     
     if (isGiveaway) {
-      // Giveaway form structure: Timestamp, Name, Mobile, Email, Town, Page, Source, Consent
+      // Giveaway form structure: Timestamp, Name, Mobile, Email, Address, ZIP, Town, Page, Source, Consent
       row = [
         timestamp,
         params.name || '',
         params.mobile || '',
         params.email || '',
+        params.address || '',
+        params.zip || '',
         params.town || '',
         params.page || '',
         params.source || '',
