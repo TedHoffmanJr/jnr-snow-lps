@@ -8,13 +8,20 @@
   
   <title>Thank You - Quote Request Received | J and R Property Services</title>
   
+  <!-- Favicons -->
+  <link rel="icon" href="images/favicons/favicon.ico" sizes="any">
+  <link rel="icon" href="images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="images/favicons/site.webmanifest">
+  
   <!-- Preload critical fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Base styles -->
-  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="css/base.css">
   
   <style>
     body {
@@ -186,8 +193,8 @@
       <h1 class="thanks-heading">Thank You!</h1>
       
       <p class="thanks-message">
-        Your snow blowing quote request has been received.<br>
-        We'll get back to you within 1-2 business days with your personalized quote.
+        Your request has been received. You're one step closer to protecting your business this winter!<br>
+        We'll assign an Account Manager and have them reach out within 1-2 business days with your personalized quote or any clarifications.
       </p>
       
       <div class="thanks-next-steps">
@@ -196,14 +203,14 @@
           <li data-step="1">Our commercial team will review your property details and snow management needs</li>
           <li data-step="2">We'll calculate custom pricing based on your property size, complexity, and service level</li>
           <li data-step="3">You'll receive a comprehensive quote via email with detailed scope and terms</li>
-          <li data-step="4">Upon acceptance, we'll schedule a site visit and add you to our priority commercial route</li>
+          <li data-step="4">Upon acceptance, we'll schedule a site visit and add you to our priority commercial routes</li>
         </ul>
       </div>
       
       <div class="giveaway-callout">
         <h3>📋 Need Additional Services?</h3>
         <p>We also provide landscaping, lawn care, and property maintenance services to keep your business looking professional year-round.</p>
-        <a href="https://www.jandrpropertyservices.com" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.jandrpropertyservices.com/commercial/" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
           View All Services →
         </a>
         <p style="font-size: var(--text-sm); margin-top: var(--space-3); opacity: 0.9;">
@@ -251,8 +258,8 @@
     }
 
     // Load all partials
-    loadPartial('header-include', '../shared/partials/header.html');
-    loadPartial('footer-include', '../shared/partials/footer.html');
+    loadPartial('header-include', 'partials/header.html');
+    loadPartial('footer-include', 'partials/footer.html');
 
     // Add confetti effect (lightweight implementation)
     function createConfetti() {

@@ -6,17 +6,17 @@
   <meta name="description" content="Cicero Snow Blowing - Professional snow removal with modern equipment. No lawn damage, predictable pricing, clean finish. J and R Property Services - serving Cicero for 20+ years.">
   <meta property="og:title" content="Cicero Snow Blowing - Stay Warm, Wake to a Clean Driveway">
   <meta property="og:description" content="Professional snow blowing service in Cicero, NY. No lawn damage, predictable pricing, clean finish. Get your quick quote today!">
-  <meta property="og:image" content="/shared/images/snow-cicero-hero.jpg">
+  <meta property="og:image" content="images/snow-cicero-hero.jpg">
   <meta property="og:type" content="website">
   
   <title>Cicero Snow Blowing - Stay Warm, Wake to a Clean Driveway | J and R Property Services</title>
   
   <!-- Favicons -->
-  <link rel="icon" href="../shared/images/favicons/favicon.ico" sizes="any">
-  <link rel="icon" href="../shared/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="icon" href="../shared/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="apple-touch-icon" href="../shared/images/favicons/apple-touch-icon.png">
-  <link rel="manifest" href="../shared/images/favicons/site.webmanifest">
+  <link rel="icon" href="images/favicons/favicon.ico" sizes="any">
+  <link rel="icon" href="images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png">
+  <link rel="manifest" href="images/favicons/site.webmanifest">
   
   <!-- Preload critical fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Base styles -->
-  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="css/base.css">
   
   <style>
     /* Page-specific styles */
@@ -209,6 +209,21 @@
       
       .map-areas-list {
         grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* Desktop section title spacing fix */
+    @media (min-width: 1024px) {
+      .section h2:first-child,
+      .section > .container > h2:first-child {
+        padding-top: var(--space-8);
+        margin-bottom: var(--space-8);
+      }
+      
+      .neighborhoods-section h2,
+      .section h2.text-center {
+        padding-top: var(--space-12);
+        margin-bottom: var(--space-8);
       }
     }
   </style>
@@ -501,14 +516,23 @@
         <div class="map-areas">
           <h4>Cicero Neighborhoods:</h4>
           <ul class="map-areas-list">
-            <li>Bay Colony</li>
-            <li>Cicero Center</li>
             <li>The Crossings</li>
+            <li>Darby Farms</li>
+            <li>Mystic Woods</li>
+            <li>Marra Meadows</li>
+            <li>Fisher Station</li>
+            <li>Lakeshore Heights</li>
+            <li>Cedar Point</li>
+            <li>Gulf Stream</li>
+            <li>Bay Colony</li>
+            <li>Lyons Runne</li>
             <li>The Pastures</li>
-            <li>Muskrat Bay</li>
+            <li>Mariners Landing</li>
             <li>Eldan Meadows</li>
             <li>Laurelwood</li>
             <li>Henryk Woods</li>
+            <li>E. Gillette Rd.</li>
+            <li>New Country</li>
           </ul>
         </div>
       </div>
@@ -630,10 +654,10 @@
     }
 
     // Load all partials
-    loadPartial('header-include', '../shared/partials/header.html');
-    loadPartial('footer-include', '../shared/partials/footer.html');
-    loadPartial('giveaway-include', '../shared/partials/giveaway-strip.html');
-    loadPartial('reviews-include', '../shared/partials/reviews.html');
+    loadPartial('header-include', 'partials/header.html');
+    loadPartial('footer-include', 'partials/footer.html');
+    loadPartial('giveaway-include', 'partials/giveaway-strip.html');
+    loadPartial('reviews-include', 'partials/reviews.html');
 
     // FAQ Accordion
     document.addEventListener('DOMContentLoaded', function() {
