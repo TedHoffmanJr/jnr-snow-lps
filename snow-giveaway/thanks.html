@@ -508,11 +508,15 @@
       const name = urlParams.get('name');
       const email = urlParams.get('email');
       const mobile = urlParams.get('mobile');
+      const address = urlParams.get('address');
+      const zip = urlParams.get('zip');
       const town = urlParams.get('town');
       
       if (name) document.getElementById('quote-name').value = decodeURIComponent(name);
       if (email) document.getElementById('quote-email').value = decodeURIComponent(email);
       if (mobile) document.getElementById('quote-mobile').value = decodeURIComponent(mobile);
+      if (address) document.getElementById('quote-address').value = decodeURIComponent(address);
+      if (zip) document.getElementById('quote-zip').value = decodeURIComponent(zip);
       if (town) {
         const townSelect = document.getElementById('quote-town');
         townSelect.value = decodeURIComponent(town);

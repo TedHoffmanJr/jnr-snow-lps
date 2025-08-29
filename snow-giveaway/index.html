@@ -429,6 +429,11 @@
         </div>
         
         <div class="field">
+          <label for="zip">ZIP Code *</label>
+          <input type="text" id="zip" name="zip" required pattern="[0-9]{5}" placeholder="13212">
+        </div>
+        
+        <div class="field">
           <label for="town">Town *</label>
           <select id="town" name="town" required>
             <option value="">Select your town</option>
@@ -557,9 +562,10 @@
             const email = encodeURIComponent(formData.get('email') || '');
             const mobile = encodeURIComponent(formData.get('mobile') || '');
             const address = encodeURIComponent(formData.get('address') || '');
+            const zip = encodeURIComponent(formData.get('zip') || '');
             const town = encodeURIComponent(formData.get('town') || '');
             
-            window.location.href = `thanks.html?name=${name}&email=${email}&mobile=${mobile}&address=${address}&town=${town}`;
+            window.location.href = `thanks.html?name=${name}&email=${email}&mobile=${mobile}&address=${address}&zip=${zip}&town=${town}`;
           } else {
             throw new Error('Submission failed');
           }
