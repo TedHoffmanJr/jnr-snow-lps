@@ -346,6 +346,41 @@
         grid-template-columns: repeat(3, 1fr);
       }
     }
+    
+    /* Industry Image Styles */
+    .industry-image {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+    
+    .industry-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .industry-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(30, 58, 95, 0.6);
+      transition: opacity 0.3s ease;
+    }
+    
+    .industry-card:hover .industry-image img {
+      transform: scale(1.05);
+    }
+    
+    .industry-card:hover .industry-overlay {
+      opacity: 0.4;
+    }
   </style>
 </head>
 <body>
@@ -463,7 +498,10 @@
       
       <div class="industries-grid">
         <div class="industry-card fade-in-element">
-          <div class="industry-icon">🏭</div>
+          <div class="industry-image">
+            <img src="images/warehouse-type.jpg" alt="Warehousing and small industrial facilities" loading="lazy">
+            <div class="industry-overlay"></div>
+          </div>
           <h3>Warehousing & Small Industrial</h3>
           <div class="industry-content">
             <p><strong>What we know:</strong> Small to medium warehouses, mechanical shops, electric shops, piping shops, and sprinkler shops need reliable access.</p>
@@ -472,7 +510,10 @@
         </div>
         
         <div class="industry-card fade-in-element" style="animation-delay: 0.1s;">
-          <div class="industry-icon">🏨</div>
+          <div class="industry-image">
+            <img src="images/apartment-type.jpg" alt="Hotels, apartments and senior living facilities" loading="lazy">
+            <div class="industry-overlay"></div>
+          </div>
           <h3>Hotels, Apartments & Senior Living</h3>
           <div class="industry-content">
             <p><strong>What we know:</strong> 24/7 return visits after guest departures and main entrance priority clearing.</p>
@@ -481,7 +522,10 @@
         </div>
         
         <div class="industry-card fade-in-element" style="animation-delay: 0.2s;">
-          <div class="industry-icon">🍔</div>
+          <div class="industry-image">
+            <img src="images/fast-food-type.jpg" alt="Restaurant and fast food facilities" loading="lazy">
+            <div class="industry-overlay"></div>
+          </div>
           <h3>Restaurant & Fast Food Chains</h3>
           <div class="industry-content">
             <p><strong>What we know:</strong> Drive-through lane priority and multiple daily visits during peak hours.</p>
@@ -705,7 +749,7 @@
         </p>
         <div class="map-container">
           <a href="https://www.google.com/maps/d/u/0/viewer?mid=1ihQPHqq-xU5RJJFnFgNrfJO5WiFI4nk&femb=1&ll=43.17035324393486%2C-76.06374171317897&z=13" target="_blank" rel="noopener noreferrer">
-            <img src="images/service-area-commercial.jpg" alt="Commercial Snow Removal Service Area Map" style="width: 100%; height: 100%; object-fit: contain; border-radius: var(--radius);">
+            <img src="images/commercial-service-area.jpg" alt="Commercial Snow Removal Service Area Map" style="width: 100%; height: 100%; object-fit: contain; border-radius: var(--radius);">
           </a>
         </div>
         <div class="text-center" style="margin-top: var(--space-4);">
