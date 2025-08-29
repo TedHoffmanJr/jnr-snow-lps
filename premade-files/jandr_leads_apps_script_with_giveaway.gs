@@ -18,6 +18,7 @@
  * GOOGLE SHEET SETUP:
  * - "Leads" tab headers: Timestamp, Name, Mobile, Email, Address, ZIP, Town, Page, Source
  * - "Giveaway" tab headers: Timestamp, Name, Mobile, Email, Address, ZIP, Town, Page, Source, Consent
+ * - "Commercial" tab headers: Timestamp, Business Name, Contact Name, Contact Phone, Contact Email, Business Address, Town, ZIP, Services Needed, Property Details, RFP URL, Page, Source
  */
 
 // Your actual Google Sheet ID
@@ -48,14 +49,25 @@ function doPost(e) {
     
     // ROUTING LOGIC:
     // - Giveaway entries (source: "Giveaway") → "Giveaway" sheet
-    // - All quote requests (source: "LP", "Giveaway-Thanks", etc.) → "Leads" sheet
+    // - Commercial entries (source: "Commercial-LP") → "Commercial" sheet
+    // - All other quote requests (source: "LP", "Giveaway-Thanks", etc.) → "Leads" sheet
     const isGiveaway = params.source === 'Giveaway';
-    const sheetName = isGiveaway ? 'Giveaway' : 'Leads';
+    const isCommercial = params.source === 'Commercial-LP';
+    
+    let sheetName;
+    if (isGiveaway) {
+      sheetName = 'Giveaway';
+    } else if (isCommercial) {
+      sheetName = 'Commercial';
+    } else {
+      sheetName = 'Leads';
+    }
     
     // Try to find the sheet (case-insensitive)
     let sheet = spreadsheet.getSheetByName(sheetName) || 
                 spreadsheet.getSheetByName(sheetName.toLowerCase()) ||
                 spreadsheet.getSheetByName('giveaway') ||
+                spreadsheet.getSheetByName('commercial') ||
                 spreadsheet.getSheetByName('leads') ||
                 spreadsheet.getSheetByName('lead');
     
@@ -81,14 +93,31 @@ function doPost(e) {
         params.source || '',
         params.consent || ''
       ];
+    } else if (isCommercial) {
+      // Commercial form structure: Timestamp, Business Name, Contact Name, Contact Phone, Contact Email, Business Address, Town, ZIP, Services Needed, Property Details, RFP URL, Page, Source
+      row = [
+        timestamp,
+        params.business_name || '',
+        params.contact_name || '',
+        params.contact_phone || '',
+        params.contact_email || '',
+        params.business_address || '',
+        params.town || '',
+        params.zip || '',
+        params.services_needed || '',
+        params.property_details || '',
+        params.rfp_url || '',
+        params.page || '',
+        params.source || ''
+      ];
     } else {
       // Leads form structure: Timestamp, Name, Mobile, Email, Address, ZIP, Town, Page, Source
       row = [
         timestamp,
-        params.name || '',
-        params.mobile || '',
-        params.email || '',
-        params.address || '',
+        params.name || params.contact_name || '',
+        params.mobile || params.contact_phone || '',
+        params.email || params.contact_email || '',
+        params.address || params.business_address || '',
         params.zip || '',
         params.town || '',
         params.page || '',
@@ -101,7 +130,7 @@ function doPost(e) {
     
     // Send email notification ONLY for quote requests (not giveaway entries)
     if (!isGiveaway) {
-      sendEmail(params, isGiveaway);
+      sendEmail(params, isGiveaway, isCommercial);
     }
     
     // Return success response
@@ -121,8 +150,9 @@ function doPost(e) {
  * Compose and send an email with the lead/giveaway details using Resend.
  * @param {Object} params Form parameters
  * @param {boolean} isGiveaway Whether this is a giveaway entry
+ * @param {boolean} isCommercial Whether this is a commercial entry
  */
-function sendEmail(params, isGiveaway = false) {
+function sendEmail(params, isGiveaway = false, isCommercial = false) {
   if (!RESEND_API_KEY || !FROM_EMAIL || !RECIPIENTS) {
     console.log('Email configuration missing, skipping email send');
     return;
@@ -132,6 +162,8 @@ function sendEmail(params, isGiveaway = false) {
   let subject;
   if (isGiveaway) {
     subject = `New Giveaway Entry – ${params.town || 'Unknown'} – ${params.name}`;
+  } else if (isCommercial) {
+    subject = `New Commercial Lead – ${params.town || 'Unknown'} – ${params.business_name || params.contact_name}`;
   } else if (params.source === 'Giveaway-Thanks') {
     subject = `New Quote Request (from Giveaway) – ${params.town || 'Unknown'} – ${params.name}`;
   } else {
@@ -142,6 +174,8 @@ function sendEmail(params, isGiveaway = false) {
   let emailHeader;
   if (isGiveaway) {
     emailHeader = 'New Giveaway Entry';
+  } else if (isCommercial) {
+    emailHeader = 'New Commercial Snow Removal Lead';
   } else if (params.source === 'Giveaway-Thanks') {
     emailHeader = 'New Quote Request (from Giveaway Thanks Page)';
   } else {
@@ -151,7 +185,34 @@ function sendEmail(params, isGiveaway = false) {
   let htmlBody = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #1e3a5f;">${emailHeader}</h2>
-      <table style="width: 100%; border-collapse: collapse;">
+      <table style="width: 100%; border-collapse: collapse;">`;
+
+  if (isCommercial) {
+    // Commercial form fields
+    htmlBody += `
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Business Name:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.business_name || 'Not provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Contact Name:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.contact_name || 'Not provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Contact Phone:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.contact_phone || 'Not provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Contact Email:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.contact_email || 'Not provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Business Address:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.business_address || 'Not provided'}</td>
+        </tr>`;
+  } else {
+    // Residential form fields
+    htmlBody += `
         <tr>
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Name:</strong></td>
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.name || 'Not provided'}</td>
@@ -165,9 +226,9 @@ function sendEmail(params, isGiveaway = false) {
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.email || 'Not provided'}</td>
         </tr>`;
         
-  if (!isGiveaway) {
-    // Add address and ZIP for leads
-    htmlBody += `
+    if (!isGiveaway) {
+      // Add address and ZIP for residential leads
+      htmlBody += `
         <tr>
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Address:</strong></td>
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.address || 'Not provided'}</td>
@@ -176,8 +237,34 @@ function sendEmail(params, isGiveaway = false) {
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>ZIP:</strong></td>
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.zip || 'Not provided'}</td>
         </tr>`;
+    }
   }
   
+  // Add commercial-specific fields
+  if (isCommercial) {
+    htmlBody += `
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>ZIP:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.zip || 'Not provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Services Needed:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.services_needed || 'Not provided'}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Property Details:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;">${params.property_details || 'Not provided'}</td>
+        </tr>`;
+    
+    if (params.rfp_url) {
+      htmlBody += `
+        <tr>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>RFP URL:</strong></td>
+          <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><a href="${params.rfp_url}">${params.rfp_url}</a></td>
+        </tr>`;
+    }
+  }
+
   htmlBody += `
         <tr>
           <td style="padding: 8px; border-bottom: 1px solid #e0e0e0;"><strong>Town:</strong></td>
