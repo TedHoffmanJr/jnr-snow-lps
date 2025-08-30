@@ -123,34 +123,66 @@
       gap: var(--space-4);
     }
     
-    .drawing-date {
+    .prize-box {
       background: rgba(255, 255, 255, 0.15);
-      padding: var(--space-4);
-      border-radius: var(--radius);
-      border-left: 4px solid white;
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .prize-box:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .prize-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-3);
+      animation: bounce 2s infinite ease-in-out;
     }
     
     .date-header {
-      font-size: var(--text-lg);
-      font-weight: 700;
-      margin-bottom: var(--space-3);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      margin-bottom: var(--space-4);
       color: white;
     }
     
-    .location-winners {
+    .prize-description {
       display: flex;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-2);
     }
     
-    .location-winners span {
-      background: rgba(255, 255, 255, 0.2);
-      padding: var(--space-2) var(--space-3);
-      border-radius: var(--radius-sm);
+    .prize-label {
       font-size: var(--text-sm);
+      color: rgba(255, 255, 255, 0.8);
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+    
+    .prize-detail {
+      font-size: var(--text-base);
+      color: white;
+      font-weight: 700;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* Delay animations for each box */
+    .prize-box:nth-child(1) .prize-icon { animation-delay: 0s; }
+    .prize-box:nth-child(2) .prize-icon { animation-delay: 0.5s; }
+    .prize-box:nth-child(3) .prize-icon { animation-delay: 1s; }
     
     @media (min-width: 768px) {
       .drawing-schedule {
@@ -342,7 +374,7 @@
     <!-- Community Message Section -->
     <div class="community-message">
       <h1 class="giveaway-title">Giving Back to Our CNY Community</h1>
-      <p class="giveaway-subtitle">Nine Lucky Winners Get FREE Snow Removal All Season!</p>
+      <p class="giveaway-subtitle">Three Lucky Winners Get FREE Snow Removal All Season!</p>
       
       <p class="community-text">
         <strong>Last year's snowfall was a reminder that CNY winters are tough enough.</strong><br>
@@ -351,43 +383,51 @@
       </p>
       
       <div class="highlight-box">
-        <h3>🎁 Nine Total Winners Across CNY!</h3>
+        <h3>🎁 Three Total Winners Across CNY!</h3>
         <p style="font-size: var(--text-lg); margin-bottom: var(--space-6);">
-          <strong>Three Drawing Dates - Three Winners Each Date</strong>
+          <strong>Three Drawing Dates - One Lucky Winner Each Date</strong>
         </p>
         
         <div class="drawing-schedule">
-          <div class="drawing-date">
+          <div class="drawing-date prize-box">
+            <div class="prize-icon">🎁</div>
             <div class="date-header">September 15</div>
-            <div class="location-winners">
-              <span>Cicero Winner</span>
-              <span>Liverpool Winner</span>
-              <span>Clay Winner</span>
+            <div class="prize-description">
+              <span class="prize-label">First Drawing</span>
+              <span class="prize-detail">One Lucky Winner!</span>
             </div>
           </div>
           
-          <div class="drawing-date">
+          <div class="drawing-date prize-box">
+            <div class="prize-icon">🏆</div>
             <div class="date-header">October 1</div>
-            <div class="location-winners">
-              <span>Cicero Winner</span>
-              <span>Liverpool Winner</span>
-              <span>Clay Winner</span>
+            <div class="prize-description">
+              <span class="prize-label">Second Drawing</span>
+              <span class="prize-detail">Another Winner!</span>
             </div>
           </div>
           
-          <div class="drawing-date">
+          <div class="drawing-date prize-box">
+            <div class="prize-icon">❄️</div>
             <div class="date-header">October 15</div>
-            <div class="location-winners">
-              <span>Cicero Winner</span>
-              <span>Liverpool Winner</span>
-              <span>Clay Winner</span>
+            <div class="prize-description">
+              <span class="prize-label">Final Drawing</span>
+              <span class="prize-detail">Last Chance to Win!</span>
             </div>
           </div>
         </div>
         
-        <p style="margin-top: var(--space-6); font-size: var(--text-lg);">
-          <strong>Total Value: Up to $4,500 in FREE Services!</strong><br>
-          <em>Each winner receives full season snow removal valued up to $500</em>
+        <div style="background: rgba(255, 255, 255, 0.1); padding: var(--space-4); border-radius: var(--radius); margin: var(--space-6) 0; border-left: 4px solid rgba(255, 255, 255, 0.5);">
+          <p style="margin: 0; font-size: var(--text-base); color: white; font-weight: 600;">
+            <span style="font-size: 1.2em;">📝</span> <strong>Enter Once, Stay Eligible for All Drawings!</strong><br>
+            <span style="font-size: var(--text-sm); opacity: 0.9; font-weight: normal;">
+              Don't win on September 15? You're automatically entered for October 1. Don't win then? You're still in the final drawing on October 15!
+            </span>
+          </p>
+        </div>
+        
+        <p style="margin-top: var(--space-4); font-size: var(--text-lg);">
+          <em>Each winner receives a full season snow removal service valued up to $500 (total value up to $1,500)</em>
         </p>
       </div>
       
@@ -490,7 +530,7 @@
       <p><strong>Drawing Dates:</strong> September 15, October 1, and October 15</p>
       <p><strong>Service Area:</strong> Cicero, Clay, Liverpool</p>
       <p style="margin-top: var(--space-4);">
-        <em>One winner from each town will be selected at random on each drawing date.<br>
+        <em>One winner will be selected at random on each drawing date.<br>
         Winners will be notified by phone and email within 2 business days.<br>
         No purchase necessary. Must be 18+, homeowner, and reside in our service area.<br>
         Prize has no cash value and cannot be transferred or exchanged.</em>

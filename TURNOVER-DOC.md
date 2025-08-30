@@ -53,7 +53,7 @@ jnr-snow-lps/
 - **Eligibility:** Anyone in service area (NOT new customers only)
 - **Prize:** Season credit (up to $500)
 - **Entry:** Via separate giveaway form only
-- **Draws:** Sept 15, Oct 1, Oct 15 (1 per town)
+- **Draws:** Sept 15, Oct 1, Oct 15 (1 winner per date, 3 total)
 - **Strip Copy:** "We're giving back this winter. Enter our season credit giveaway. If you win, we apply a credit to your account (new or current customers). Must be in service area."
 
 ### 🖼️ Images Status
