@@ -247,8 +247,9 @@ strong {
 }
 
 .btn--accent:hover {
-  background-color: #dc2626;
-  border-color: #dc2626;
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
   text-decoration: none;
@@ -645,6 +646,34 @@ strong {
 .fade-in-element.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Global button hover text fixes - prevent text from disappearing */
+.btn:hover,
+.btn:hover span {
+  color: inherit !important;
+}
+
+.btn--primary:hover,
+.btn--primary:hover span {
+  color: var(--color-white) !important;
+}
+
+.btn--accent:hover,
+.btn--accent:hover span {
+  color: var(--color-white) !important;
+}
+
+.btn--secondary:hover,
+.btn--secondary:hover span {
+  color: var(--color-white) !important;
+}
+
+/* Fix giveaway strip button hover - ensure good contrast */
+.giveaway-strip .btn:hover {
+  background-color: var(--color-navy) !important;
+  border-color: var(--color-navy) !important;
+  color: var(--color-white) !important;
 }
 
 /* Tablet Styles */
