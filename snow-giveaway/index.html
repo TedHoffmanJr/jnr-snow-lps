@@ -198,6 +198,7 @@
       border-radius: var(--radius-xl);
       padding: var(--space-8);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      margin-top: var(--space-8);
       margin-bottom: var(--space-8);
       animation: fadeInUp 0.6s ease-out 0.6s both;
     }
@@ -476,6 +477,22 @@
       </div>
     </div>
 
+    <!-- Service Area Map Section -->
+    <div class="map-section">
+      <div class="map-header">
+        <h2>Our Service Area</h2>
+        <p>Make sure you're in our service area to be eligible for the giveaway</p>
+      </div>
+      
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/d/embed?mid=1ihQPHqq-xU5RJJFnFgNrfJO5WiFI4nk&ehbc=2E312F&ll=43.155398210293065%2C-76.11335494683695&z=12" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+      <div class="service-areas-text">
+        <p><strong>Service Areas:</strong> Cicero, Clay, & Liverpool Routes</p>
+      </div>
+    </div>
+
     <!-- Entry Form Section -->
     <div class="entry-form-section" id="enter">
       <div class="form-header">
@@ -506,7 +523,7 @@
         
         <div class="field">
           <label for="zip">ZIP Code *</label>
-          <input type="text" id="zip" name="zip" required pattern="[0-9]{5}" placeholder="13212">
+          <input type="text" id="zip" name="zip" required pattern="[0-9]{5}" placeholder="13039">
         </div>
         
         <div class="field">
@@ -517,7 +534,6 @@
             <option value="Clay">Clay</option>
             <option value="Liverpool">Liverpool</option>
             <option value="North Syracuse">North Syracuse</option>
-            <option value="Other">Other CNY Location</option>
           </select>
         </div>
         
@@ -543,22 +559,6 @@
       </form>
       
       <p id="statusMessage" class="form-status"></p>
-    </div>
-
-    <!-- Service Area Map Section -->
-    <div class="map-section">
-      <div class="map-header">
-        <h2>Our Service Area</h2>
-        <p>Make sure you're in our service area to be eligible for the giveaway</p>
-      </div>
-      
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/d/embed?mid=1ihQPHqq-xU5RJJFnFgNrfJO5WiFI4nk&ehbc=2E312F" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      
-      <div class="service-areas-text">
-        <p><strong>Service Areas:</strong> Cicero, Clay, Liverpool, North Syracuse, and surrounding CNY areas</p>
-      </div>
     </div>
     
     <!-- Additional Info -->
