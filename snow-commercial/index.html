@@ -381,6 +381,46 @@
     .industry-card:hover .industry-overlay {
       opacity: 0.4;
     }
+    
+    /* Mobile sticky bottom bar */
+    .mobile-sticky-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid var(--color-gray-200);
+      padding: var(--space-3);
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+    }
+    
+    .mobile-sticky-buttons {
+      display: flex;
+      gap: var(--space-3);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .mobile-sticky-buttons .btn {
+      flex: 1;
+      text-align: center;
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-2);
+      white-space: nowrap;
+    }
+    
+    @media (max-width: 767px) {
+      .mobile-sticky-bar {
+        display: block;
+      }
+      
+      /* Add padding to body to prevent content overlap */
+      body {
+        padding-bottom: 70px;
+      }
+    }
   </style>
   
   <!-- Meta Pixel Code -->
@@ -429,40 +469,24 @@
     <div class="hero-image"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-large-title animate-fade-in">CNY's Most Reliable<br>Commercial Snow Service</div>
+      <div class="hero-large-title animate-fade-in">ONE ICY MORNING CAN COST YOU.<br>ONE SLIP-AND-FALL CAN CLOSE YOU.</div>
       <h1 class="hero-headline animate-fade-in-up">
         Commercial Snow Management<br>
         <span style="font-size: 0.8em; font-weight: 600;">Keep Your Business Open & Liability-Free</span>
       </h1>
       <p class="hero-subheadline animate-fade-in-up" style="animation-delay: 0.2s;">
-        24/7 emergency response. Zero-tolerance snow removal.<br>
-        Complete liability protection for your property.
+        Keep your property open and safe with J and R's commercial snow & ice management. 20+ CNY winters, 60+ units on the road, GPS-tracked crews.
       </p>
       <div class="hero-trust animate-fade-in" style="animation-delay: 0.4s;">
-        <span class="hero-trust-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M3 17h2.5L6 16v-2H3v3zM8 17h8v-2.5c0-.83-.67-1.5-1.5-1.5h-5c-.83 0-1.5.67-1.5 1.5V17zM18 17h2.5l.5-1v-2h-3v3zM22 12h-3V7c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v5H2v4c0 1.1.9 2 2 2h1c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h1c1.1 0 2-.9 2-2v-4z"/>
-          </svg>
-          Fleet of 50+ Vehicles
-        </span>
-        <span class="hero-trust-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-          </svg>
-          24/7 Service
-        </span>
-        <span class="hero-trust-item">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-          </svg>
-          Fully Insured
-        </span>
+        <div style="font-size: var(--text-lg); font-weight: 600; color: var(--color-accent); text-align: center;">
+          60+ Units • GPS-Tracked Crews • 24/7 Dispatch • Locally Owned Since 2003
+        </div>
       </div>
     </div>
     <!-- Hero CTA Button positioned at bottom of hero -->
     <div class="hero-bottom-cta">
       <a href="#form" class="btn btn--secondary btn--large">
-        Request a Quote in 60 seconds →
+        Get Commercial Quote Now →
       </a>
     </div>
   </section>
@@ -470,7 +494,7 @@
   <!-- Value Stack Section -->
   <section class="section">
     <div class="container">
-      <h2 class="text-center fade-in-element">Why CNY Businesses Choose J and R Commercial Snow</h2>
+      <h2 class="text-center fade-in-element">Why CNY Businesses Trust J and R Commercial Snow</h2>
       <div class="value-stack">
       <div class="value-item fade-in-element">
         <div class="value-icon">📋</div>
@@ -573,7 +597,7 @@
       <!-- CTA after industries -->
       <div class="text-center" style="margin-top: var(--space-8);">
         <a href="#form" class="btn btn--accent btn--large fade-in-element">
-          Get Specialized Service →
+          Get Commercial Quote Now →
         </a>
       </div>
     </div>
@@ -611,8 +635,29 @@
     <!-- CTA after equipment -->
     <div class="text-center" style="margin-top: var(--space-8); padding: var(--space-4) 0;">
       <a href="#form" class="btn btn--accent btn--large fade-in-element">
-        Request Equipment Quote →
+        Get Commercial Quote Now →
       </a>
+    </div>
+  </section>
+
+  <!-- Keep Your Business Running Band -->
+  <section class="section" style="background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-dark) 100%); color: white; padding: var(--space-8) 0;">
+    <div class="container text-center">
+      <h2 class="fade-in-element" style="color: white; margin-bottom: var(--space-4);">Keep Your Business Running All Winter</h2>
+      <p class="hero-subheadline fade-in-element" style="margin-bottom: var(--space-6);">
+        Join 300+ CNY businesses that trust J and R for snow removal
+      </p>
+      <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+        <a href="#form" class="btn btn--accent btn--large fade-in-element">
+          Get Commercial Quote Now →
+        </a>
+        <a href="tel:3156994971" class="btn btn--secondary btn--large fade-in-element">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Call (315) 699-4971
+        </a>
+      </div>
     </div>
   </section>
 
@@ -628,8 +673,8 @@
         <!-- Commercial form integration -->
         <form id="quick-quote-form" class="quote-form" novalidate>
           <div class="field">
-            <label for="business_name">Business Name *</label>
-            <input type="text" id="business_name" name="business_name" required placeholder="Your Company LLC">
+            <label for="business_name">Business Name (optional)</label>
+            <input type="text" id="business_name" name="business_name" placeholder="Your Company LLC">
           </div>
           
           <div class="form-row">
@@ -656,7 +701,7 @@
           <div class="form-row">
             <div class="field">
               <label for="town">Town *</label>
-              <input type="text" id="town" name="town" required placeholder="Syracuse, Liverpool, or Clay">
+              <input type="text" id="town" name="town" required placeholder="Cicero">
             </div>
             <div class="field">
               <label for="zip">ZIP Code *</label>
@@ -722,13 +767,16 @@
           <button type="submit" id="submitBtn" class="btn btn--primary btn--large btn--full">
             Get Commercial Quote Now →
           </button>
+          
+          <p class="text-center" style="color: var(--color-gray-600); font-size: var(--text-sm); margin-top: var(--space-2);">
+            Takes ~60 seconds. No obligation.
+          </p>
+          <p class="text-center" style="color: var(--color-accent); font-weight: 600; font-size: var(--text-sm); margin-top: var(--space-2);">
+            ⚡ Response within 1 business day guaranteed
+          </p>
         </form>
         
         <p id="statusMessage" class="form-status"></p>
-        
-        <p class="text-center mt-6" style="color: var(--color-accent); font-weight: 600;">
-          ⚡ Response within 1 business day guaranteed
-        </p>
       </div>
     </div>
   </section>
@@ -766,8 +814,8 @@
             </div>
           </div>
         </div>
-        <a href="https://www.jandrpropertyservices.com/commercial-snow-consumer-tips/" class="btn btn--primary btn--large budget-billing-btn snow-tips-btn" style="margin-top: var(--space-6);" target="_blank" rel="noopener noreferrer">
-          <span>Snow Service Tips</span>
+        <a href="#form" class="btn btn--primary btn--large budget-billing-btn" style="margin-top: var(--space-6);">
+          <span>Get Commercial Quote Now</span>
           <span class="btn-arrow">→</span>
         </a>
       </div>
@@ -802,12 +850,12 @@
     <div class="container">
       <h2 class="text-center fade-in-element">Frequently Asked Questions</h2>
       <div class="faq-list fade-in-element" style="max-width: 800px; margin: 0 auto;">
-        <div class="faq-item">
+        <div class="faq-item active">
           <button class="faq-question">
-            What's your response time for emergency calls?
+            How fast do you respond during storms?
           </button>
           <div class="faq-answer">
-            <p>Our dispatch team monitors weather conditions 24/7 and pre-positions equipment for rapid deployment. We provide management-level oversight for every commercial area with extra trucks and oversight to handle difficult snowfalls. For routine snow removal, we typically begin service when accumulation reaches your contracted trigger depth.</p>
+            <p>Crews are staged before bands set up. Dispatch is 24/7 and return visits are built into high-traffic plans.</p>
           </div>
         </div>
         
@@ -859,26 +907,14 @@
     </div>
   </section>
 
-  <!-- Final CTA Section -->
-  <section class="section" style="background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-dark) 100%); color: white;">
-    <div class="container text-center">
-      <h2 class="fade-in-element" style="color: white;">Keep Your Business Running All Winter</h2>
-      <p class="hero-subheadline fade-in-element" style="margin-bottom: var(--space-8);">
-        Join 300+ CNY businesses that trust J and R for snow removal
-      </p>
-      <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-        <a href="#form" class="btn btn--accent btn--large fade-in-element">
-          Get Commercial Quote Now →
-        </a>
-        <a href="tel:3156994971" class="btn btn--secondary btn--large fade-in-element">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          Call (315) 699-4971
-        </a>
-      </div>
+
+  <!-- Mobile Sticky Bottom Bar -->
+  <div class="mobile-sticky-bar">
+    <div class="mobile-sticky-buttons">
+      <a href="#form" class="btn btn--primary">Get Quote</a>
+      <a href="tel:3156994971" class="btn btn--secondary">Call</a>
     </div>
-  </section>
+  </div>
 
   <!-- Footer -->
   <div id="footer-include"></div>
